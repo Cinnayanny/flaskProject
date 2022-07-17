@@ -1,0 +1,77 @@
+h1 {
+    color: #dc711a;
+    text-align: center;
+}
+
+.gridcon {
+    display:grid;
+    grid-template-columns: auto auto; /*2 column grid, auto resize*/
+    grid-gap: 1em;
+    padding: 1em;
+}
+
+.gridcon2 {
+    display:grid;
+    grid-template-columns: auto auto auto; /*3 column grid, auto resize*/
+    grid-gap: 1em;
+    padding: 1em;
+}
+
+.full-width2 {
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+
+.full-width {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #542424;
+    width: 100%;
+}
+
+.navbar a {
+    float: left;
+    font-size: 1em;
+    color: #b46527;
+    text-align: center;
+    padding: 1em 1em;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #3f3030;
+}
+
+body {
+    background-color: #260707;
+    color: #b46527;
+}
+
+.grid-container > div {
+    background-color: rgba(255,255,255, 0.2);
+}
+
+.imagetext {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.TextonImage {
+    position: relative;
+    color: #b46527;
+}
+
+footer {
+    position: relative;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #562f1f;
+    color: #9ea3b7;
+    text-align: center;
+}
