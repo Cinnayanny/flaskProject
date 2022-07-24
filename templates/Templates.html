@@ -16,7 +16,7 @@
         <input type="text" id="search" name="search">
         <button onclick="authentication(this.form)">Search</button></p>
     </form>
-    <img src="Images/Ngunnawal%20Banner%20Logo.png" width="535" height="168">
+    <img src="/static/Images/Ngunnawal%20Banner%20Logo.png" width="535" height="168">
 </div>
 
 <div class="gridcon"> <!-- Overall -->
@@ -24,19 +24,15 @@
         <h1>Welcome to Ngunnawal Country</h1>
     </div>
     <div> <!-- Cell 1 -->
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi erat lorem, mollis at orci in, blandit malesuada lectus. Maecenas at turpis scelerisque, tincidunt libero quis, commodo nisi. Cras faucibus tincidunt enim vel sagittis. Sed ornare sapien ante, at luctus magna egestas vel. Sed auctor efficitur sodales. Sed ornare porttitor risus. Fusce lacus lacus, tempor a dui ut, vulputate ultricies ante. Integer varius, eros a auctor pulvinar, leo purus consectetur tortor, non ultrices ante urna quis enim. Nam massa nisi, congue vitae enim ut, tempor congue enim. Fusce vel ultrices ligula, non molestie massa.
-        </p>
+        {% block cellContent1 %} {% endblock %}
     </div>
     <div><!-- Column 2 -->
         <div class="imagetext"> <!-- Cell 2 -->
-            <img src="Images/Ngunnawal%20Tree.jpg">
-            <div class="TextonImage">
-                Coonancoocabil Lagoon in the Murrumbidgee Valley National Park
+            {% block cellContent2 %} {% endblock %}
             </div>
         </div>
         <div><!-- 3 -->
-            <p>Integer sed luctus ligula. Maecenas bibendum eros quis vulputate sagittis. Vestibulum tortor quam, pulvinar eget rhoncus a, gravida at sem. Curabitur in libero mi. Vestibulum mi turpis, ullamcorper in eleifend at, pharetra sed enim. Nam mattis mollis nunc, nec ornare ante varius et. Integer quis lacinia nisi. Proin dapibus quam ac ligula placerat tincidunt. Quisque pharetra elementum dui non dapibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum blandit faucibus eleifend. Nunc elit mauris, pharetra quis enim eget, faucibus sodales metus. Vestibulum iaculis ultrices metus, id semper enim hendrerit a. Quisque molestie diam et aliquet finibus.
-            </p>
+           {% block cellContent3 %} {% endblock %}
         </div>
     </div>
 </div>
