@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <title>{{ title}}</title>
     <link rel="stylesheet" href="/static/Ngunnawal.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
     {% block pageStyle %}
     {% endblock %}
 </head>
 <body>
 <!-- Navbar -->
 <div class="navbar">
-    <a href="Index.html">Home</a>
-    <a href="Profile.html">Profile and Contacts</a>
-    <a href="Image Gallery.html">Image Gallery</a>
-    <a href="History.html">History and Info</a>
+    <a href="/static/Index.html">Home</a>
+    <a href="/static/Profile.html">Profile and Contacts</a>
+    <a href="/static/Image Gallery.html">Image Gallery</a>
+    <a href="/static/History.html">History and Info</a>
     <form><p><label for="search"></label>
         <input type="text" id="search" name="search">
         <button onclick="authentication(this.form)">Search</button></p>
