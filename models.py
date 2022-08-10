@@ -9,10 +9,10 @@ class Contact(db.Model):
     message = db.Column(db.Text)
     dateSubmitted = db.Column(db.DateTime)
 
-    class todo(db.Model):
-        id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-        text = db.Column(db.Text)
-        done = db.Column(db.Boolean)
+ class todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    text = db.Column(db.Text)
+    done = db.Column(db.Boolean)
 
     def __init__(self, name, email, message):
         self.name = name
