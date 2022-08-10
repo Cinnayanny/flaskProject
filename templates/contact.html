@@ -1,4 +1,4 @@
-{% extends 'template.html' %}
+{% extends 'template.html' %} <!-- This calls the blocks from template.html-->
 
 {# Place the content for the cellContent1 in this block #}
 {% block cellContent1 %}
@@ -31,7 +31,7 @@
     {% endfor %}
     </p>
     <p>{{ form.submit() }}</p>
-</form>
+</form> <!-- The form on the page.-->
 {% endblock %}
 
 {# Place the content for the cellContent3 in this block #}

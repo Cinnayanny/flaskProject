@@ -12,7 +12,7 @@
 <body>
 <!-- Navbar -->
 <img src="/static/Images/Ngunnawal%20Banner%20Logo.png" width="535" height="168">
-<nav class="navbar" style="background-color: #542424;">
+<nav class="navbar" style="background-color: #542424;"> <!-- The navbar. Uses Bootstrap/-->
   <div class="container-fluid">
     <a class="nav-link" href="#">
         <img src="/static/Images/Ngunnawal%20Website%20Logo.png">
@@ -20,10 +20,10 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav"> <!--It's a collapsable navbar-->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link"  href="index.html">Home</a>
+          <a class="nav-link"  href="">Home</a> <!--This page already opens on index.html. Adding it breaks the link-->
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/static/History.html">History</a>
@@ -32,10 +32,10 @@
           <a class="nav-link" href="/static/Image%20Gallery.html">Gallery</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact.html">Contact Me</a>
+          <a class="nav-link" href="contact.html">Contact Me</a> <!-- Don't need to have a directory, as this is in the same directory-->
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="todo.html">To Do List</a>
+          <a class="nav-link" href="todo">To Do List</a>
         </li>
       </ul>
     </div>
@@ -51,7 +51,8 @@
         <button onclick="authentication(this.form)">Search</button></p>
     </form>
     <img src="/static/Images/Ngunnawal%20Banner%20Logo.png" width="535" height="168">
-</div>-->
+</div>
+old navbar-->
 
 <div class="gridcon"> <!-- Overall -->
     <div class="full-width">
@@ -70,6 +71,7 @@
         </div>
     </div>
 </div>
+<!-- Pre-formatted. Other pages don't need to put the formatting code in-->
 <footer class="footer">
     {% block cellContent4 %} {% endblock %}
 </footer>
