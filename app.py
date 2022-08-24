@@ -16,7 +16,7 @@ from forms import ContactForm, RegistrationForm, LoginForm
 def homepage():  # put application's code here
     return render_template("index.html", title="Ngunnawal Country", user=current_user)
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/registration", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -26,12 +26,12 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for("homepage"))
-    return render_template("registration.html", title="User Registration", form=form)
+    return render_template("registration.html", title="User Registration", form=form, user=current_user)
 
 @app.route("/contact.html", methods=["POST", "GET"])
 def contact():
     form = ContactForm()
-    return render_template("contact.html", title ="Contact Us", form=form)
+    return render_template("contact.html", title ="Contact Us", form=form, user=current_user)
 
 @app.route('/todo', methods=["POST", "GET"])
 def view_todo():
@@ -43,7 +43,7 @@ def view_todo():
         db.session.commit()
         db.session.refresh(new_todo)
         return redirect("/todo")
-    return render_template("todo.html", todos=all_todo)
+    return render_template("todo.html", todos=all_todo, user=current_user)
 @app.route("/todoedit/<todo_id>", methods=["POST", "GET"])
 def edit_note(todo_id):
     if request.method == "POST":
@@ -55,22 +55,19 @@ def edit_note(todo_id):
     elif request.method == "GET":
         db.session.query(todo).filter_by(id=todo_id).delete()
         db.session.commit()
-    return redirect("/todo", code=302)
+    return redirect("/todo", code=302, user=current_user)
 
 if __name__ == '__main__':
     app.run()
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login.html', methods=["GET", "POST"])
 def login():
-    form = LoginForm
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
         if user is None or not user.check_password(form.password.data):
             return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('homepage'))
-    return render_template("login.html", title="Sign In", form=form)
+    return render_template("login.html", title="Sign In", form=form, user=current_user)
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
