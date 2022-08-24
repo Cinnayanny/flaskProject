@@ -1,13 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import current_user, login_user, LoginManager, logout_user, login_required
 
 
 app = Flask(__name__)
 app.config.from_object(Config)  # loads the configuration for the database
 db = SQLAlchemy(app)            # creates the db object using the configuration
+login = LoginManager(app)
+login.login_view = 'login'
 from models import Contact, todo, User
-from forms import ContactForm, RegistrationForm
+from forms import ContactForm, RegistrationForm, LoginForm
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -56,3 +59,14 @@ def edit_note(todo_id):
 
 if __name__ == '__main__':
     app.run()
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = LoginForm
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=form.email_address.data).first()
+        if user is None or not user.check_password(form.password.data):
+            return redirect(url_for('login'))
+        login_user(user)
+        return redirect(url_for('homepage'))
+    return render_template("login.html", title="Sign In", form=form)
