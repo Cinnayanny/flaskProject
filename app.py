@@ -14,7 +14,7 @@ from forms import ContactForm, RegistrationForm, LoginForm
 
 @app.route('/')
 def homepage():  # put application's code here
-    return render_template("index.html", title="Ngunnawal Country")
+    return render_template("index.html", title="Ngunnawal Country", user=current_user)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
