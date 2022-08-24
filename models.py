@@ -38,6 +38,6 @@ def __init__(self, name, email, message):
     self.message = message
     self.dateSubmitted = datetime.today()
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+#@login.user_loader
+#def load_user(id):
+#    return User.query.get(int(id))
