@@ -70,3 +70,7 @@ def login():
         login_user(user)
         return redirect(url_for('homepage'))
     return render_template("login.html", title="Sign In", form=form)
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
