@@ -41,9 +41,15 @@
           <li class="nav-item">
           <a class="nav-link" href="registration">User Registration</a>
         </li>
+          {% if user.is_anonymous %}
           <li class="nav-item">
           <a class="nav-link" href="login.html">Login</a>
         </li>
+          {% else %}
+          <li class="nav-item">
+          <a class="nav-link" href="logout.html">Logout</a>
+        </li>
+          {% endif %}
       </ul>
     </div>
   </div>
