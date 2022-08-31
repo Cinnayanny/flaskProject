@@ -11,6 +11,7 @@
   {{ form.hidden_tag() }}
 
     <p>
+    <span style="color: black;">Email</span>
     {{ form.email_address.label }}<br>
     {{ form.email_address(size=32) }}<br>
     {% for error in form.email_address.errors %}
@@ -18,6 +19,7 @@
     {% endfor %}
 </p>
     <p>
+    <span style="color: black;">Password</span>
     {{ form.password.label }}<br>
     {{ form.password(size=32) }}<br>
     {% for error in form.password.errors %}
@@ -26,6 +28,9 @@
 
     <p>{{ form.submit() }}</p>
 </form>
+
+    Username = jenniferwood005@gmail.com
+    Password = password (placeholder)
 {% endblock %}
 
 {# Place the content for the cellContent3 in this block #}

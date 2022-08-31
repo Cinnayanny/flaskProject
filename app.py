@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user, login_user, LoginManager, logout_user, login_required
@@ -25,12 +25,14 @@ def register():
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
+        flash("You have registered. Thank you for joining our site!")
         return redirect(url_for("homepage"))
     return render_template("registration.html", title="User Registration", form=form, user=current_user)
 
 @app.route("/contact.html", methods=["POST", "GET"])
 def contact():
     form = ContactForm()
+    flash("Thank you for your feedback! We will get back to you")
     return render_template("contact.html", title ="Contact Us", form=form, user=current_user)
 
 @app.route('/todo', methods=["POST", "GET"])
@@ -68,12 +70,14 @@ def login():
         if user is None or not user.check_password(form.password.data):
             return redirect(url_for('login'))
         login_user(user)
+        flash("You have logged in")
         return redirect(url_for('homepage'))
     return render_template("login.html", title="Sign In", form=form, user=current_user)
 
 @app.route('/logout')
 def logout():
     logout_user()
+    flash("You have logged out")
     return redirect(url_for('homepage'))
 
 @app.route('/reset_password', methods=['GET', 'POST'])
@@ -84,6 +88,7 @@ def reset_password():
         user = User.query.filter_by(email_address=current_user.email_address).first()
         user.set_password(form.new_password.data)
         db.session.commit()
+        flash("Your password is successfully changed")
         return redirect(url_for('homepage'))
     return render_template("passwordreset.html", title='Reset Password', form=form, user=current_user)
 
