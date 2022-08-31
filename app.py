@@ -92,3 +92,11 @@ def reset_password():
         return redirect(url_for('homepage'))
     return render_template("passwordreset.html", title='Reset Password', form=form, user=current_user)
 
+@app.route('/history')
+def history():  # I don't think it has any code
+    return render_template("history.html", title="Ngunnawal History", user=current_user)
+
+@app.route('/gallery')
+def gallery():  # I don't think it has any code
+    return render_template("gallery.html", title="Gallery", user=current_user)
+
