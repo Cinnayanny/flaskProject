@@ -100,3 +100,12 @@ def history():  # I don't think it has any code
 def gallery():  # I don't think it has any code
     return render_template("gallery.html", title="Gallery", user=current_user)
 
+# Error Handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html", user=current_user), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template("500.html", user=current_user), 500
