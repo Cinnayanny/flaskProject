@@ -10,7 +10,7 @@ db = SQLAlchemy(app)            # creates the db object using the configuration
 login = LoginManager(app)
 login.login_view = 'login'
 from models import Contact, todo, User
-from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm
+from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm
 
 @app.route('/')
 def homepage():  # put application's code here
@@ -109,3 +109,15 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template("500.html", user=current_user), 500
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    Form = UserProfileForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email_address=current_user.email_address).first()
+        user.update_details(email_address=form.email_address.data, name=form.name.data)
+        db.session.commit()
+        flash("Your details have been changed")
+        return redirect(url_for("homepage"))
+	return render_template("userProfile.html", title="User Profile", user=current_user)

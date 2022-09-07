@@ -38,6 +38,10 @@ class User(UserMixin, db.Model):
         self.message = message
         self.dateSubmitted = datetime.today()
 
+    def update_details(self, email_address, name):
+        self.email_address = email_address
+        self.name = name
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

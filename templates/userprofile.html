@@ -1,0 +1,61 @@
+{% extends 'template.html' %}
+
+{# Place the content for the cellContent1 in this block #}
+{% block cellContent1 %}
+    Sidebar
+{% endblock %}
+
+{# Place the content for the cellContent2 in this block #}
+{% block cellContent2 %}
+    <div class="container text-left">
+        <div class="row">
+            <div class="col-md-6">
+                User Name
+            </div>
+            <div class="col-md-6">
+                {{ user.name }
+    {{ form.name.label }}<br>
+    {{ form.name(size=32) }}<br>
+    {% for error in form.name.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                Email Address
+            </div>
+            <div class="col-md-6">
+                {{ user.email_address }}
+                    {{ form.email_address.label }}<br>
+    {{ form.email_address(size=32) }}<br>
+    {% for error in form.email_address.errors %}
+    <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                Password Hash
+            </div>
+            <div class="col-md-6">
+<a href="/reset_password">Reset Password</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                User Level
+            </div>
+            {% if user.user_level==1 %}
+    Administrator
+{% else %}
+    User
+{% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{# Place the content for the cellContent3 in this block #}
+{% block cellContent4 %}
+    Footer
+{% endblock %}
