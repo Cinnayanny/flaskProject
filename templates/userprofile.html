@@ -13,8 +13,7 @@
                 User Name
             </div>
             <div class="col-md-6">
-                {{ user.name }
-    {{ form.name.label }}<br>
+                {{ form.name.label }}<br>
     {{ form.name(size=32) }}<br>
     {% for error in form.name.errors %}
     <span style="color: red;">[{{ error }}]</span>
@@ -26,12 +25,12 @@
                 Email Address
             </div>
             <div class="col-md-6">
-                {{ user.email_address }}
                     {{ form.email_address.label }}<br>
     {{ form.email_address(size=32) }}<br>
     {% for error in form.email_address.errors %}
     <span style="color: red;">[{{ error }}]</span>
     {% endfor %}
+                <p>{{ form.submit() }}</p>
             </div>
         </div>
         <div class="row">
