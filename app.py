@@ -32,6 +32,10 @@ def register():
 @app.route("/contact.html", methods=["POST", "GET"])
 def contact():
     form = ContactForm()
+    if form.validate_on_submit():
+        new_contact = Contact(name=form.name.data, email=form.email.data, message=form.message.data)
+        db.session.add(new_contact)
+        db.session.commit()
     flash("Thank you for your feedback! We will get back to you")
     return render_template("contact.html", title ="Contact Us", form=form, user=current_user)
 
@@ -124,3 +128,9 @@ def profile():
         flash("Your details have been changed")
         return redirect(url_for("homepage"))
     return render_template("userProfile.html", title="User Profile", user=current_user, form=form)
+
+@app.route('/contact_messages')
+@login_required
+def view_contact_messages():
+    contact_messages = Contact.query.all()
+    return render_template("contactMessages.html", title="Contact Messages", user=current_user, messages=contact_messages)
