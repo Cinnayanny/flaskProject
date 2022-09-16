@@ -52,16 +52,19 @@ def view_todo():
     return render_template("todo.html", todos=all_todo, user=current_user)
 @app.route("/todoedit/<todo_id>", methods=["POST", "GET"])
 def edit_note(todo_id):
-    if request.method == "POST":
-        db.session.query(todo).filter_by(id=todo_id).update({
-            "text": request.form['text'],
-            "done": True if request.form['done'] == "on" else False
-        })
-        db.session.commit()
-    elif request.method == "GET":
-        db.session.query(todo).filter_by(id=todo_id).delete()
-        db.session.commit()
-    return redirect("/todo", code=302, user=current_user)
+    if current_user.is_admin():
+        if request.method == "POST":
+            db.session.query(todo).filter_by(id=todo_id).update({
+                "text": request.form['text'],
+                "done": True if request.form['done'] == "on" else False
+            })
+            db.session.commit()
+        elif request.method == "GET":
+            db.session.query(todo).filter_by(id=todo_id).delete()
+            db.session.commit()
+        return redirect("/todo", code=302, user=current_user)
+    else:
+        return render_template("unauthorised.html", user=current_user)
 
 if __name__ == '__main__':
     app.run()
@@ -132,5 +135,8 @@ def profile():
 @app.route('/contact_messages')
 @login_required
 def view_contact_messages():
-    contact_messages = Contact.query.all()
-    return render_template("contactMessages.html", title="Contact Messages", user=current_user, messages=contact_messages)
+    if current_user.is_admin():
+        contact_messages = Contact.query.all()
+        return render_template("contactMessages.html", title="Contact Messages", user=current_user, messages=contact_messages)
+    else:
+        return render_template("unauthorised.html", user=current_user)
