@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from wtforms import StringField, SubmitField, IntegerField, PasswordField
+from wtforms import StringField, SubmitField, IntegerField, PasswordField, FileField
+from flask_wtf.file import FileRequired
 from models import User
 
 class ContactForm (FlaskForm):
@@ -34,3 +35,8 @@ class UserProfileForm(FlaskForm):
     email_address = StringField("Email Address (Username)", validators=[DataRequired(), Email()])
     name = StringField("Full Name", validators=[DataRequired()])
     submit = SubmitField("Update Profile")
+
+class PhotoUploadForm(FlaskForm):
+    title = StringField("Image Title", validators=[DataRequired()])
+    image = FileField('Photo File Upload', validators=[FileRequired()])
+    submit = SubmitField("Upload Photo")

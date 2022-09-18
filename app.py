@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user, login_user, LoginManager, logout_user, login_required
+from werkzeug.utils import secure_filename
+import random, os
 
 
 app = Flask(__name__)
@@ -9,8 +11,8 @@ app.config.from_object(Config)  # loads the configuration for the database
 db = SQLAlchemy(app)            # creates the db object using the configuration
 login = LoginManager(app)
 login.login_view = 'login'
-from models import Contact, todo, User
-from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm
+from models import Contact, todo, User, Photos
+from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm, PhotoUploadForm
 
 @app.route('/')
 def homepage():  # put application's code here
