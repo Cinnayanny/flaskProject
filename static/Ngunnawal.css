@@ -46,13 +46,16 @@ h1 {
     background-color: #3f3030;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 1em;
+    padding: 1em;
+}
+
 body {
     background-color: #260707;
     color: #b46527;
-}
-
-.grid-container > div {
-    background-color: rgba(255,255,255, 0.2);
 }
 
 .imagetext {

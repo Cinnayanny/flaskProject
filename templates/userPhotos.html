@@ -34,6 +34,15 @@
 </div>
 {% endblock %}
 
+{% block cellContent3 %}
+<div class="grid-container">
+	  {% for image in images %}
+	      <div>{{ image.title }}<br>
+	          <img src="/static/images/userPhotos/{{ image.filename }}" width="auto"></div>
+	  {% endfor %}
+</div>
+{% endblock %}
+
 {# Place the content for the cellContent3 in this block #}
 {% block cellContent4 %}
     Footer

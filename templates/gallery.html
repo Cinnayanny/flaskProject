@@ -7,6 +7,7 @@
 
 {# Place the content for the cellContent2 in this block #}
 {% block cellContent2 %}
+    <p style="color: black">Website Developer Images</p>
         <img src="/static/Images/Ngunnawal%20Sunset.jpg" width="1024" height="439">
         <div class="TextonImage">
             Sunset over Ngunnawal in ACT
@@ -15,6 +16,16 @@
         <div class="TextonImage">
             Coonancoocabil Lagoon in the Murrumbidgee Valley National Park
         </div>
+{% endblock %}
+
+{% block cellContent3 %}
+    <p style="color: black">User Submitted Images</p>
+<div class="grid-container">
+	  {% for image in Images %}
+	      <div>{{ image.title }}<br>
+	          <img src="/static/images/userPhotos/{{ image.filename }}" width="auto" alt="auto"></div>
+	  {% endfor %}
+</div>
 {% endblock %}
 
 {% block cellContent4 %}

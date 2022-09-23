@@ -11,6 +11,11 @@ app.config.from_object(Config)  # loads the configuration for the database
 db = SQLAlchemy(app)            # creates the db object using the configuration
 login = LoginManager(app)
 login.login_view = 'login'
+
+UPLOAD_FOLDER = './static/images/userPhotos/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 from models import Contact, todo, User, Photos
 from forms import ContactForm, RegistrationForm, LoginForm, ResetPasswordForm, UserProfileForm, PhotoUploadForm
 
@@ -40,6 +45,30 @@ def contact():
         db.session.commit()
     flash("Thank you for your feedback! We will get back to you")
     return render_template("contact.html", title ="Contact Us", form=form, user=current_user)
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/userPhotos', methods=['GET', 'POST'])
+@login_required
+def photos():
+    form = PhotoUploadForm()
+    user_images = Photos.query.filter_by(userid=current_user.id).all()
+    if form.validate_on_submit():
+        new_image = form.image.data
+        filename = secure_filename(new_image.filename)
+
+        if new_image and allowed_file(filename):
+            new_image.save(os.path.join(UPLOAD_FOLDER, filename))
+            photo = Photos(title=form.title.data, filename=filename, userid=current_user.id)
+            db.session.add(photo)
+            db.session.commit()
+            flash("Image Uploaded")
+            return redirect(url_for("photos"))
+        else:
+            flash("The File Upload failed.")
+    return render_template("userPhotos.html", title="User Photos", user=current_user, form=form, images=user_images)
 
 @app.route('/todo', methods=["POST", "GET"])
 def view_todo():
