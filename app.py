@@ -186,3 +186,15 @@ def list_all_users():
     else:
         flash("You must be an administrator to access this functionality.")
         return redirect(url_for("homepage"))
+
+@app.route('/reset_password/<userid>', methods=['GET', 'POST'])
+@login_required
+def reset_user_password(userid):
+    form = ResetPasswordForm()
+    user = User.query.filter_by(id=userid).first()
+    if form.validate_on_submit():
+        user.set_password(form.new_password.data)
+        db.session.commit()
+        flash('Password has been reset for user {}'.format(user.name))
+        return redirect(url_for('homepage'))
+    return render_template("passwordreset.html", title='Reset Password', form=form, user=user)
