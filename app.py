@@ -176,3 +176,13 @@ def view_contact_messages():
         return render_template("contactMessages.html", title="Contact Messages", user=current_user, messages=contact_messages)
     else:
         return render_template("unauthorised.html", user=current_user)
+
+@app.route('/admin/list_all_users')
+@login_required
+def list_all_users():
+    if current_user.is_admin():
+        all_users = User.query.all()
+        return render_template("listAllUsers.html", title="All Active Users", user=current_user, users=all_users)
+    else:
+        flash("You must be an administrator to access this functionality.")
+        return redirect(url_for("homepage"))

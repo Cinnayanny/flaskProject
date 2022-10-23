@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+
+{# Place the content for the cellContent1 in this block #}
+{% block cellContent1 %}
+    Sidebar
+{% endblock %}
+
+{# Place the content for the cellContent2 in this block #}
+{% block cellContent2 %}
+  <div class="container-fluid">
+    {% for user in users %}
+        <div class="row">
+            <div class="col-md-4">{{ user.email_address }}</div>
+            <div class="col-md-4"><a href="/reset_password/{{ user.id }}">Reset Password</a></div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{# Place the content for the cellContent3 in this block #}
+{% block cellContent3 %}
+    Footer
+{% endblock %}
+
+{# Place the content for the cellContent4 in this block #}
+{% block cellContent4 %}
+    Footer
+{% endblock %}
