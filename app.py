@@ -28,7 +28,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         new_user = User(email_address=form.email_address.data, name=form.name.data,
-                        user_level=1)  # defaults to regular user
+                        user_level=1, active=1)  # defaults to regular user
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
@@ -110,7 +110,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email_address=form.email_address.data).first()
-        if user is None or not user.check_password(form.password.data):
+        if user is None or not user.check_password(form.password.data) or not user.active:
             return redirect(url_for('login'))
         login_user(user)
         flash("You have logged in")
@@ -214,3 +214,11 @@ def reset_user_password(userid):
         flash('Password has been reset for user {}'.format(user.name))
         return redirect(url_for('homepage'))
     return render_template("passwordreset.html", title='Reset Password', form=form, user=user)
+
+@app.route('/admin/user_enable/<userid>')
+@login_required
+def user_enable(userid):
+    user = User.query.filter_by(id=userid).first()
+    user.active = not user.active
+    db.session.commit()
+    return redirect(url_for("list_all_users"))
