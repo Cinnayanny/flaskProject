@@ -3,7 +3,7 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import current_user, login_user, LoginManager, logout_user, login_required
 from werkzeug.utils import secure_filename
-import random, os
+import os
 
 
 app = Flask(__name__)
@@ -203,21 +203,21 @@ def reset_user_password(userid):
         flash("You must be an administrator to access this functionality.")
         return redirect(url_for("homepage"))
 
-@app.route('/reset_user_password/<userid>', methods=['GET', 'POST'])
-@login_required
-def reset_user_password(userid):
-    if current_user.is_admin():
-        form = ResetPasswordForm()
-        user = User.query.filter_by(id=userid).first()
-        if form.validate_on_submit():
-            user.set_password(form.new_password.data)
-            db.session.commit()
-            flash('Password has been reset for user {}'.format(user.name))
-            return redirect(url_for('homepage'))
-        return render_template("passwordreset.html", title='Reset Password', form=form, user=user)
-    else:
-        flash("You must be an administrator to access this functionality.")
-        return redirect(url_for("homepage"))
+# @app.route('/reset_user_password/<userid>', methods=['GET', 'POST'])
+# @login_required
+# def reset_user_password(userid):
+#     if current_user.is_admin():
+#         form = ResetPasswordForm()
+#         user = User.query.filter_by(id=userid).first()
+#         if form.validate_on_submit():
+#             user.set_password(form.new_password.data)
+#             db.session.commit()
+#             flash('Password has been reset for user {}'.format(user.name))
+#             return redirect(url_for('homepage'))
+#         return render_template("passwordreset.html", title='Reset Password', form=form, user=user)
+#     else:
+#         flash("You must be an administrator to access this functionality.")
+#         return redirect(url_for("homepage"))
 
 @app.route('/admin/user_enable/<userid>')
 @login_required
