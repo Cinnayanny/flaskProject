@@ -49,6 +49,7 @@ class Photos(db.Model):
     filename = db.Column(db.String(255))
     userid = db.Column(db.Integer)
     dateSubmitted = db.Column(db.DateTime)
+    enabled = db.Column(db.Boolean)
     def __init__(self, title, filename, userid):
         self.title = title
         self.filename = filename
