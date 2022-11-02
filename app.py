@@ -203,7 +203,7 @@ def reset_user_password(userid):
         flash("You must be an administrator to access this functionality.")
         return redirect(url_for("homepage"))
 
-@app.route('/reset_password/<userid>', methods=['GET', 'POST'])
+@app.route('/reset_user_password/<userid>', methods=['GET', 'POST'])
 @login_required
 def reset_user_password(userid):
     if current_user.is_admin():
